@@ -13,7 +13,7 @@ from config import USER_AGENT
 from urllib.parse import quote
 from utils.logger import logger
 from utils.console import println
-from utils.process import process_start, get_code_list
+from utils.process import process_start
 from utils.jd_init import jd_init
 from db.model import Code
 
@@ -76,15 +76,18 @@ class JdCutePet:
             println('{}, 访问服务器异常:{}!'.format(self.account, e.args))
     
     @logger.catch
-    async def help_friend(self, session):
+    async def help_friend(self, session, max_count=5):
         """
         助力好友
+        :param max_count:
         :param session:
         :return:
         """
         item_list = Code.get_code_list(CODE_CUT_PET)
-        item_list.extend(get_code_list(CODE_CUT_PET))
+        count = 0
         for item in item_list:
+            if count >= max_count:
+                break
             friend_account, friend_code = item.get('account'), item.get('code')
             if self.account == friend_account:
                 continue
@@ -94,6 +97,7 @@ class JdCutePet:
             if data['resultCode'] != '0':
                 println('{}, 无法助力好友:{}, {}!'.format(self.account, friend_account, data['message']))
             else:
+                count += 1
                 println('{}, 成功助力好友:{}!'.format(self.account, friend_account))
 
     @logger.catch
@@ -429,7 +433,7 @@ class JdCutePet:
             await self.feed_food_again(session)  # 再次喂食
             await self.collect_energy(session)
             await self.get_friend_help_award(session)
-            self.message += '【活动入口】京东APP->我的->东东萌宠\n'
+            self.message = None
 
     async def run_help(self):
         """

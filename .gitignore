@@ -126,3 +126,7 @@ logs/
 
 sqlite.db
 test*.py
+
+fake2
+js_scripts
+package-lock.json

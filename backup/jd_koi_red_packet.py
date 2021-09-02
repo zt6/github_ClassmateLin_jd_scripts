@@ -16,7 +16,7 @@ from config import USER_AGENT
 from utils.logger import logger
 from utils.jd_init import jd_init
 from utils.console import println
-from utils.process import get_code_list, process_start
+from utils.process import process_start
 from db.model import Code
 
 CODE_KEY = 'jd_koi_red_packet'
@@ -165,7 +165,6 @@ class JdKoiRedPacket:
         """
         async with aiohttp.ClientSession(headers=self.headers, cookies=self.cookies) as session:
             item_list = Code.get_code_list(code_key=CODE_KEY)
-            item_list.extend(get_code_list(CODE_KEY))
 
             for item in item_list:
                 account, code = item.get('account'), item.get('code')

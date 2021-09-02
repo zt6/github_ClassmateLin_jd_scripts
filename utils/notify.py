@@ -175,10 +175,14 @@ def push_server(title, content):
         println("\n未配置SERVER_SEND_KEY, 不推送server酱消息...")
         return
     try:
-        url = "https://sc.ftqq.com/%s.send" % (SERVER_SEND_KEY)
+        url = "https://sc.ftqq.com/{}.send".format(SERVER_SEND_KEY)
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'}
-
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                          'Chrome/62.0.3202.94 Safari/537.36'}
+        if '【活动名称】' in content:
+            content = content.replace('【活动名称】', '### 【活动名称】')
+        else:
+            content = content.replace('【京东账号】', '### 【京东账号】')
         payload = {'text': title, 'desp': content}
         requests.post(url, params=payload, headers=headers)
         println('\n成功推送消息到server酱!')

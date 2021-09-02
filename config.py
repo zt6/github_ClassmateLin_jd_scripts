@@ -22,6 +22,9 @@ if not os.path.exists(LOG_DIR):
 # 示例配置文件路径
 EXAMPLE_CONFIG_PATH = os.path.join(BASE_DIR, 'conf/.config_example.yaml')
 
+# js脚本目录
+JS_SCRIPTS_DIR = os.path.join(BASE_DIR, 'js_scripts')
+
 # 备份配置文件路径
 BAK_CONFIG_PATH = os.path.join(BASE_DIR, 'conf/config.yaml.bak')
 
@@ -66,6 +69,9 @@ JOY_PROCESS_NUM = cfg.get('joy_process_num', 1)
 
 # 宠汪汪喂食
 JOY_FEED_COUNT = cfg.get('joy_feed_count', 20)
+
+# 宠汪汪兑换京豆数
+JOY_EXCHANGE_COUNT = cfg.get('joy_exchange_num', 20)
 
 # JD COOKIES
 JD_COOKIES = [j for j in [{'pt_pin': re.search(r'pt_pin=(.*?);', i).group(1),
@@ -166,3 +172,7 @@ JD_TRY_FILTER_KEYWORDS = [i.strip() for i in cfg.get('jd_try_filter_keywords', '
 
 # chrome路径
 CHROME_PATH = cfg.get('chrome_path', None)
+
+# 京东超市蓝币兑换物品,选项: 20, 1000, 或者其它商品唯一关键字, 默认20
+JD_SUPERMARKET_EXCHANGE = cfg.get('jd_supermarket_exchange', 20)
+

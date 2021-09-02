@@ -3,6 +3,7 @@
 # @Time    : 2021/8/27 2:16 下午
 # @File    : jx_sign.py
 # @Project : jd_scripts
+# @Cron    : 10 10 * * *
 # @Desc    : 京喜APP->首页->签到领红包
 import asyncio
 import json

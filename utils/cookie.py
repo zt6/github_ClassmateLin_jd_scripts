@@ -5,11 +5,13 @@
 # @Project : jd_scripts
 # @Desc    :
 import json
+import os
 from urllib.parse import urlencode
 
 import aiohttp
 import requests
 import urllib3
+
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -102,3 +104,19 @@ def sync_check_cookie(cookies):
         print(e.args)
         return False
 
+
+def export_cookie_env(cookie_list):
+    """
+    导出JS使用的cookie环境变量
+    :param cookie_list:
+    :return:
+    """
+    jd_cookie_list = []
+    for item in cookie_list:
+        if item.get('ws_key'):
+            item['pt_key'] = ws_key_to_pt_key(item.get('pt_pin'), item.get('ws_key'))
+        jd_cookie_list.append('pt_pin={};pt_key={};'.format(item.get('pt_pin'), item.get('pt_key')))
+
+    jd_cookie = '&'.join(jd_cookie_list)
+
+    os.environ.setdefault('JD_COOKIE', jd_cookie,)

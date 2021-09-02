@@ -17,7 +17,7 @@ from urllib.parse import quote
 from furl import furl
 from utils.console import println
 from utils.logger import logger
-from utils.process import process_start, get_code_list
+from utils.process import process_start
 from utils.jd_init import jd_init
 
 from db.model import Code
@@ -396,7 +396,7 @@ class JdPlantingBean:
         :return:
         """
         item_list = Code.get_code_list(code_key=CODE_PLANTING_BEAN)
-        item_list.extend(get_code_list(CODE_PLANTING_BEAN))
+
         for item in item_list:
             friend_account, friend_code = item.get('account'), item.get('code')
             if self.account == friend_account:
@@ -531,6 +531,7 @@ class JdPlantingBean:
             await self.get_friend_nutriments(session)
             await self.collect_nutriments(session)
             await self.get_reward(session)
+            self.message = None # 取消通知
 
     async def run_help(self):
         """

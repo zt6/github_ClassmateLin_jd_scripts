@@ -94,7 +94,7 @@ def generate_default_crontab(output='default_crontab.sh'):
         'PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin\n\n'
     ]
     crontab_list = [
-        '# 定时更新脚本\n40 4,23 * * * /bin/docker-entrypoint >> /dev/null  2>&1\n\n',
+        '# 定时更新脚本\n40 4,14,23 * * * /bin/docker-entrypoint >> /dev/null  2>&1\n\n',
     ]
     exclude_scripts = get_exclude_scripts()
 

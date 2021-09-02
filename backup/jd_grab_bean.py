@@ -12,7 +12,6 @@ from config import USER_AGENT
 from urllib.parse import urlencode
 from utils.console import println
 from utils.jd_init import jd_init
-from utils.process import get_code_list
 from db.model import Code
 
 # 抢京豆
@@ -125,7 +124,6 @@ class JdGrabBean:
         }
 
         item_list = Code.get_code_list(CODE_JD_GRAB_BEAN)
-        item_list.extend(get_code_list(CODE_JD_GRAB_BEAN))
         for item in item_list:
             try:
                 account, code = item.get('account'), item.get('code')

@@ -11,7 +11,7 @@ import json
 import re
 import random
 
-from urllib.parse import unquote, quote
+from urllib.parse import quote
 from config import USER_AGENT
 from utils.console import println
 from utils.jd_init import jd_init

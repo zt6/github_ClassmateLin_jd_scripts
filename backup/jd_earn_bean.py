@@ -12,7 +12,7 @@ import asyncio
 import aiohttp
 
 
-from urllib.parse import unquote, quote
+from urllib.parse import quote
 from utils.console import println
 from utils.process import process_start
 from utils.logger import logger

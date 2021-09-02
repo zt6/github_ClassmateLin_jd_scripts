@@ -3,12 +3,12 @@
 # @Time    : 2021/7/21 2:01 下午
 # @File    : clean_log.py
 # @Project : jd_scripts
-# @Cron    : 30 23 * * *
+# @Cron    : 57 23 * * *
 # @Desc    : 清除日志, 默认保留三天, 可在配置中修改
 import re
 import os
 import moment
-from config import LOG_DIR
+from config import LOG_DIR, DB_PATH
 from utils.console import println
 
 
@@ -33,5 +33,14 @@ def clean_log(days=2):
     println('成功清除个{}日志文件!'.format(count))
 
 
+def clean_db():
+    """
+    """
+    if os.path.exists(DB_PATH):
+        println('成功清除DB!')
+        os.remove(DB_PATH)
+
+
 if __name__ == '__main__':
     clean_log()
+    clean_db()

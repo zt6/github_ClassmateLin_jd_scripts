@@ -3,7 +3,7 @@
 # @Time    : 2021/8/24 3:56 下午
 # @File    : jx_pasture_collect.py
 # @Project : jd_scripts
-# @Cron    : 40 */1 * * *
+# @Cron    : 40 */2 * * *
 # @Desc    : 京喜APP->京喜牧场->定时收金币/割草/投喂小鸡
 import aiohttp
 from utils.console import println

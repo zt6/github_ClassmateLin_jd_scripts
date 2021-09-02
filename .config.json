@@ -1,0 +1,25 @@
+{
+  "log_days": 3,
+  "jd": {
+    "cookies": [],
+    "dd_farm": {
+      "use_bean_card": false,
+      "retain_water": 80
+    },
+    "jd_supermarket_exchange": 20
+  },
+  "notify": {
+    "push_plus": {
+      "group": null,
+      "token": null
+    },
+    "server_jiang": {
+      "key": null
+    },
+    "telegram": {
+      "proxy_url": null,
+      "bot_token": null,
+      "user_id": null
+    }
+  }
+}

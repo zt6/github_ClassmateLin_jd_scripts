@@ -11,6 +11,7 @@ import asyncio
 import aiohttp
 import ujson
 from dateutil.relativedelta import relativedelta
+from config import JOY_EXCHANGE_COUNT
 from jd_joy import JdJoy
 from datetime import datetime
 
@@ -67,9 +68,17 @@ class JdJoyExchange(JdJoy):
 
         can_exchange_map = dict()
 
+        try:
+            joy_exchange_count = int(JOY_EXCHANGE_COUNT)
+        except Exception as e:
+            logger.info(e.args)
+            joy_exchange_count = 20
+
         for gift in gift_list:
             if pet_coin > gift['salePrice']:
-                can_exchange_map[int(gift['giftValue'])] = gift['id']
+                if joy_exchange_count == int(gift['giftValue']):
+                    can_exchange_map[int(gift['giftValue'])] = gift['id']
+                    break
 
         if not can_exchange_map:
             println('{}, 当前暂无可兑换商品!'.format(self.account))

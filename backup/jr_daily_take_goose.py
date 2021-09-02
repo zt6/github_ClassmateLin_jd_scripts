@@ -314,7 +314,7 @@ class JrDailyTakeGoose:
             await asyncio.sleep(1)
             await self.to_exchange(session)
             await asyncio.sleep(1)
-            await self.notify(session)
+            #await self.notify(session)
 
 
 if __name__ == '__main__':

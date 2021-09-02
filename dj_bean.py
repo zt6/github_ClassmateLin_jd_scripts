@@ -5,7 +5,6 @@
 # @Project : jd_scripts
 # @Cron    : 45 7,12,19 * * *
 # @Desc    : 京东APP->京东到家->签到->所有任务
-import moment
 import aiohttp
 import asyncio
 from utils.console import println
@@ -129,83 +128,6 @@ class DjBean:
             else:
                 await self.receive_task(session, task)
 
-    @logger.catch
-    async def get_bean_detail(self, session, page=1, page_size=30):
-        """
-        :return:
-        """
-        body = {
-            "pageSize": page_size,
-            "pageNo": page,
-            "refPageSource": "Integral",
-            "pageSource": "pointdetail",
-            "ref": "mypoint",
-            "ctp": "pointdetail"
-        }
-        res = await self.get(session, 'memberPoints/userPointsDetail', body)
-        if res['code'] != '0':
-            println('{}, 无法获取鲜豆明细!'.format(self.account))
-            return None
-        return res['result']
-
-    @logger.catch
-    async def bean_change(self, session):
-        """
-        鲜豆变动通知
-        :return:
-        """
-        total_bean = 0  # 鲜豆总数
-        yesterday = moment.date(moment.now().sub('days', 1)).zero
-        today = moment.date(moment.now()).zero
-        today_used = 0   # 今日支出
-        today_income = 0  # 今日收入
-        yesterday_income = 0  # 昨日收入
-        yesterday_used = 0  # 昨日支出
-
-        page = 1
-        finished = False
-
-        println('{}, 正在获取资产变动信息...'.format(self.account))
-
-        while True:
-            detail = await self.get_bean_detail(session, page)
-            if not detail or 'evaluateList' not in detail or len(detail['evaluateList']) < 0:
-                break
-            total_bean = detail['points']
-            item_list = detail['evaluateList']
-            for item in item_list:
-                day = moment.date(item['createTime'], '%H:%M:%S').zero
-                amount = int(item['points'])
-                if day.diff(yesterday).days == 0:
-                    if amount > 0:  # 收入
-                        yesterday_income += amount
-                    else:  # 支出
-                        yesterday_used += -amount
-
-                elif day.diff(yesterday).days >= 1:  # 昨天之前的日期跳过
-                    finished = True
-                    break
-
-                if day.diff(today).days == 0:
-                    if amount > 0:
-                        today_income += amount
-                    else:
-                        today_used = -amount
-            if finished:
-                break
-            else:
-                page += 1
-
-        message = '\n【活动名称】赚鲜豆\n【活动入口】京东APP>京东到家->签到\n'
-        message += '【京东账号】{}\n【活动昵称】{}\n'.format(self.account, self.nickname)
-        message += '【连续签到】{}天\n'.format(self.already_sign_days)
-        message += '【鲜豆总数】{}\n【今日收入】{}\n【今日支出】{}\n'.format(total_bean, today_income, today_used)
-        message += '【昨日收入】{}\n【昨天支出】{}\n'.format(yesterday_income, yesterday_used)
-
-        self.message = message
-
-        println('{}, 获取资产变动信息完成...'.format(self.account))
-
     async def run(self):
         """
         程序入口
@@ -224,7 +146,6 @@ class DjBean:
                 return
             await self.daily_sign(session)
             await self.do_task(session)
-            await self.bean_change(session)
 
 
 if __name__ == '__main__':

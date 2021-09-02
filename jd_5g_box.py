@@ -17,7 +17,7 @@ from utils.console import println
 from utils.logger import logger
 from utils.jd_init import jd_init
 from db.model import Code
-from utils.process import process_start, get_code_list
+from utils.process import process_start
 
 # 5G盲盒助力码
 CODE_5G_BOX = 'jd_5g_box'
@@ -164,7 +164,6 @@ class Jd5GBox:
         """
         async with aiohttp.ClientSession(headers=self.headers, cookies=self.cookies) as session:
             item_list = Code.get_code_list(CODE_5G_BOX)
-            item_list.extend(get_code_list(CODE_5G_BOX))
             for item in item_list:
                 account, code = item.get('account'), item.get('code')
                 if account == self.account:
@@ -175,6 +174,8 @@ class Jd5GBox:
                     println('{}, 成功助力好友:{}'.format(self.account, account))
                 else:
                     println('{}, 无法助力好友:{}, {}'.format(self.account, account, res.get('msg')))
+                    if res.get('code') == 2005:
+                        break
 
                 await asyncio.sleep(1)
 

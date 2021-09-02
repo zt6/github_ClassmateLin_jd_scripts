@@ -51,6 +51,8 @@ class JrPetPig:
                 'reqData': json.dumps(body)
             }
             url += urlencode(params)
+
+            println(url)
             if method == 'GET':
                 response = await session.get(url=url)
             else:
@@ -339,6 +341,12 @@ class JrPetPig:
         :return:
         """
         async with aiohttp.ClientSession(headers=self.headers, cookies=self.cookies) as session:
+            data = await self.request(session, 'pigPetLogin', {
+                "source": 2,
+                "channelLV": "juheye",
+                "riskDeviceParam": "{}",
+            })
+            return
             is_login = await self.login(session)
             if not is_login:
                 println('{},登录失败, 退出程序...'.format(self.account))
@@ -348,7 +356,7 @@ class JrPetPig:
             await self.open_box(session)
             await self.lottery(session)
             await self.add_food(session)
-            await self.notify(session)
+            #await self.notify(session)
 
     async def notify(self, session):
         """

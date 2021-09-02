@@ -16,7 +16,6 @@ from datetime import datetime
 from urllib.parse import urlencode
 from utils.jx_init import jx_init
 from utils.console import println
-from utils.process import get_code_list
 from utils.logger import logger
 from db.model import Code
 
@@ -35,11 +34,7 @@ class JxFactory:
     """
     headers = {
         'referer': 'https://st.jingxi.com/',
-        'user-agent': 'jdpingou;android;4.11.0;11;a27b83d3d1dba1cc;network/wifi;model/RMX2121;appBuild/17304;partner'
-                      '/oppo01;;session/136;aid/a27b83d3d1dba1cc;oaid/;pap/JA2019_3111789;brand/realme;eu'
-                      '/1623732683334633;fv/4613462616133636;Mozilla/5.0 (Linux; Android 11; RMX2121 '
-                      'Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 '
-                      'Chrome/91.0.4472.120 Mobile Safari/537.36'
+        'user-agent': 'jdpingou'
     }
 
     host = 'https://m.jingxi.com/'
@@ -186,7 +181,6 @@ class JxFactory:
             '_stk': '_time,sharepin,zone'
         }
         item_list = Code.get_code_list(CODE_JX_FACTORY_WORK)
-        item_list.extend(get_code_list(CODE_JX_FACTORY_WORK))
         for item in item_list:
             account, code = item.get('account'), item.get('code')
             if account == self.account:
@@ -562,7 +556,6 @@ class JxFactory:
         :return:
         """
         item_list = Code.get_code_list(CODE_JX_FACTORY_TUAN)
-        item_list.extend(CODE_JX_FACTORY_TUAN)
         path = 'dreamfactory/tuan/JoinTuan'
         for item in item_list:
             if type(item) != dict:
@@ -642,6 +635,10 @@ class JxFactory:
 
         if res.get('ret', -1) == 0:
             println('{}, 投入电量成功!'.format(self.account))
+        elif res.get('ret',-1) == 1403:
+            msg = res.get('msg')
+            println('{}, 投入电量失败!({})'.format(self.account, msg))
+            self.invalid_reason = msg
         else:
             println('{}, 投入电量失败!'.format(self.account))
 
@@ -687,7 +684,10 @@ class JxFactory:
         else:
             self.message += '【商品名称】{}\n【所需电量】{}\n【投入电量】{}\n'.format(self.production_name,
                                                                     self.need_electric, self.inserted_electric)
-            self.message += '【生成进度】{}%\n'.format(self.production_stage_progress)
+            if hasattr(self, 'invalid_reason'):
+                self.message += '【生成进度】生产已失效!请重新选择商品!\n'
+            else:
+                self.message += '【生成进度】{}%\n'.format(self.production_stage_progress)
 
         self.message += '【活动入口】京喜APP-我的-京喜工厂'
 

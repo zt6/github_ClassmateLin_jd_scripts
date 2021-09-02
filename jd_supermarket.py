@@ -43,8 +43,6 @@ class JdSupermarket:
         try:
             if not body:
                 body = {"channel": "1"}
-            else:
-                body
             params = {
                 'functionId': function_id,
                 'appid': 'jdsupermarket',

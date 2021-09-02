@@ -14,7 +14,6 @@ from utils.console import println
 from utils.process import process_start
 from utils.jd_init import jd_init
 from utils.logger import logger
-from utils.process import get_code_list
 from db.model import Code
 
 # 领现金助力码
@@ -207,7 +206,6 @@ class JdCash:
         session.headers.add('Referer', 'https://h5.m.jd.com/babelDiy/Zeus/GzY6gTjVg1zqnQRnmWfMKC4PsT1/index.html')
 
         item_list = Code.get_code_list(code_key=CODE_JD_CASH)
-        item_list.extend(get_code_list(CODE_JD_CASH))
         for item in item_list:
             friend_account, friend_code = item.get('account'), item.get('code')
             if friend_account == self.account:

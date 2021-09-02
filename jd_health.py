@@ -13,7 +13,7 @@ from db.model import Code
 from urllib.parse import urlencode
 from utils.jd_init import jd_init
 from utils.console import println
-from utils.process import process_start, get_code_list
+from utils.process import process_start
 from config import USER_AGENT
 
 ERRCODE_DEFAULT = 9999
@@ -31,7 +31,7 @@ class JdHealth:
     energy = 0  # 当前能量
 
     headers = {
-        'user-agent': 'jdapp;' + USER_AGENT,
+        'user-agent': USER_AGENT,
         'content-type': 'application/x-www-form-urlencoded',
         'origin': 'https://h5.m.jd.com',
         'referer': 'https://h5.m.jd.com/',
@@ -54,7 +54,7 @@ class JdHealth:
                 'client': 'wh5',
                 'body': json.dumps(body),
                 'clientVersion': '1.0.0',
-                'uuid': '0'
+                'uuid': ''
             }
             url = 'https://api.m.jd.com/?' + urlencode(params)
             if method == 'POST':
@@ -345,7 +345,6 @@ class JdHealth:
         :return:
         """
         item_list = Code.get_code_list(CODE_JD_HEALTH)
-        item_list.extend(get_code_list(CODE_JD_HEALTH))
         for item in item_list:
             account, code = item.get('account'), item.get('code')
 

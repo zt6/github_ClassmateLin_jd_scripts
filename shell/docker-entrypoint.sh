@@ -6,11 +6,13 @@ if [ -z $CODE_DIR ]; then
 fi
 
 if [ -z $REPO_URL ]; then
-  REPO_URL=https://github.com/ClassmateLin/jd_scripts.git
+  REPO_URL=https://github.com/ClassmateLin/scripts.git
 fi
 
+
+
 if [ ! -f "/root/.ssh/id_rsa" ]; then
-  echo -e "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEA18ht1+0SbjGfPGpIf//nkQDatLRBrpcMKPehR/tdotn00ar/\nKWOqisZtWAyPMmm1KLYHEWe0Nzunm43W4YQpM2o1HOFghwaSCYGYZUuebipB/3jM\n6bSdYtHJIKDsJBZ2J/AJu3NnPjQLxkjzWKySb+f8ZkLhYzmdkx0Lu2Vi0jXVqnwn\nqDOhaZy8BYeFWHFluDjzC1Cmcbkrn5Hj2hKwdyIsRdDGxbYau1T8TVyAPGzmoL1O\nZlzsPAfXxtMesOKbLhOgYzU73lEmC4SUbVzg0kU2CfAc9z4+sYd9gTCFR8L7L6lr\ng7zjvSIvPEYK0ordwHXefJPL1XbP8+n/HmNzgQIDAQABAoIBAQCFtOMjdfoCn+rc\ng7sS3V3+wrnCWSON7HiTdgXQ1ZgKzeVeegeL/P7y6MteUMH2afvgExLEHS9VPji4\nMaahrMPe4QOyNpEaed7J1yy4L6gm+TZV9+N5OPqA/h8TgcNxBR4H1zwgk/y4VYWq\nQw/OtXgzsVr7fpusYUobm1bmsocOWzt03cBJ3YXcu0KVhK2NxsB8cOPEAgaLDZzO\nSx/zk7tAaOlDgrJpauq/o823ckKQy56zVpV2oaQWncvwYmX+FDzIUAt+MTVO73zz\nn0AjPaKQgbMC2DtejrGzEvDub7ydfMAvwN3LJa57z6iiDO36J+H6mxfBvB57cqj6\nV/Q1lIABAoGBAPsr+VSYKJSOlzyt0RUa4kKCpgmqY+YO7q/0jff30CPHHl88E2sR\nZSzlgDijBvb64hHTwSUNS0Cmfl2RzHdmS981pKYIgrCQlyaVA3ctOFF40rOFMXtw\nD/VirmA8MYuybktq5JW88z0nkvOB8rD58eOM1iTPywoiq2jo3ZGT+fsBAoGBANvu\nTiQKTSfpKru5VCojCuCk1mUW4Qw6pV2q8+UiVGjxX7jP5Ow5K9qi0mEQBkG3t2Du\n3gktWZg3cAflKh4Wbyb1dYdv0Vrk5fTgtPj/1KOIs1mIXJOt8AHfTpiWHkSMoQLt\nl+i+x1IQJyUSsRqsRl5c+LeFIfhDL++1QFGxQ/iBAoGBAIApyxr4XVSYgeFrjBGp\n2yQ3CERMVpdQrUjJkBukruditkPAIuRyRt8m6Et+HJKwJ+US2S5v3yNJEZfrSpru\nbu6hr7ctBorT7Ny6Er+gKmmgLlt+LmafIvWCehoO/PUcgh0nmSYy+ScOZ3SrrUvS\n7jO/bJHyGde9IxvwHwcmq9sBAoGADLcZY3IJBe6wHsxXNlxyS4ycLJoHBtr5JpI0\nqaGzeaHC4/94/8NKasiRGzV+9xu1CXCl+6fYjzldS8ePCNBJOtpkIiFv3C5xsRew\nvtijpZTIsbt1hsA+qQ0NETtUoqfywyWTa8xj37W5XaZYAO/G3bvIUWvsC9tukRBM\nmKyD/oECgYBghlogdkPHkZjT/J4KHAbNlHu2u378LE6obw1PU5U+Bn/KxgbumAQy\nGJiWCbZ6tf/3eSKThWE1SihHv9P0qUis+z4uvctNMRZ3ttnEGoDvNbOBRWW3xxSu\nAble5o/TFwAEtTfESt3gzx+BTjya+kdUckAuZDiN0xXw9dkRJqj+5w==\n-----END RSA PRIVATE KEY-----" >> /root/.ssh/id_rsa;
+  echo -e "-----BEGIN OPENSSH PRIVATE KEY-----\n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\n-----END OPENSSH PRIVATE KEY-----" >> /root/.ssh/id_rsa;
   chmod 600 /root/.ssh/id_rsa;
   ssh-keyscan gitee.com > /root/.ssh/known_hosts;
 fi
@@ -39,6 +41,15 @@ if ! type node >/dev/null 2>&1; then
   apt clean;
 else
     echo "nodejs 已安装";
+fi
+
+if ! type npm >/dev/null 2>&1; then
+  echo "正在安装npm...";
+  apt -y install npm;
+  npm install typescript -g;
+  apt clean;
+else
+    echo "npm 已安装";
 fi
 
 if ! type chromium >/dev/null 2>&1; then
@@ -86,10 +97,21 @@ echo "更新cron任务..."
 crontab -r;
 python $CODE_DIR/tools/update_config.py;
 python $CODE_DIR/tools/update_default_crontab.py;
+
+# 更新js库
+python $CODE_DIR/update_nodejs.py;
+
 cat $CODE_DIR/shell/default_crontab.sh > /tmp/crontab;
 echo -e "\n" >> /tmp/crontab;
 
 cat $CODE_DIR/conf/crontab.sh >> /tmp/crontab;
+
+if [ ! -f "/scripts/logs/pyjs.lock" ]; then
+  echo "export PATH='/scripts:$PATH'" >> /etc/profile;
+  source /etc/profile;
+  echo "export PATH='/scripts:$PATH'" >> ~/.bashrc;
+  echo "lock" > /scripts/logs/pyjs.lock;
+fi
 
 crontab /tmp/crontab;
 
@@ -99,9 +121,8 @@ echo "重启cron进程...";
 
 /etc/init.d/cron restart;
 
-rm -rf $CODE_DIR/sqlite.db;
-
 echo "######更新脚本执行完毕######";
+
 
 # 保证容器不退出
 tail -f /dev/null;

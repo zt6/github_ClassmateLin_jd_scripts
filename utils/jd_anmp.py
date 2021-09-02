@@ -44,7 +44,7 @@ class JdAnmp:
             session.headers.update(self.headers)
             session.cookies.update(self.cookies)
             response = session.get(url=self.url, verify=False)
-            text = response.text
+            text = response.content.decode('utf-8')
             temp = re.search('var snsConfig =(.*)var SharePlatforms', text, re.S).group(1)
             data = json.loads(temp)
             self.token = data.get('actToken')

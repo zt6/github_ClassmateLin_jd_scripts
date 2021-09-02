@@ -365,7 +365,12 @@ def dj_init(cls):
     cls.dj_pin = None
 
     def init(self, **kwargs):
-        self.account = unquote(kwargs.get('pt_pin'))
+
+        self.account = kwargs.get('account', None)
+
+        if not self.account:
+            self.account = unquote(kwargs.get('pt_pin'))
+
         self.cookies = {
             'pt_pin': kwargs.get('pt_pin'),
             'pt_key': kwargs.get('pt_key'),

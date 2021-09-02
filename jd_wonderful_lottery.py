@@ -16,7 +16,7 @@ from utils.jd_init import jd_init
 from utils.console import println
 from config import USER_AGENT
 from db.model import Code
-from utils.process import process_start, get_code_list
+from utils.process import process_start
 
 CODE_KEY = 'jd_wonderful_lottery'
 
@@ -127,7 +127,7 @@ class JdWonderfulLottery:
         """
         async with aiohttp.ClientSession(headers=self.headers, cookies=self.cookies) as session:
             item_list = Code.get_code_list(code_key=CODE_KEY)
-            item_list.extend(get_code_list(code_key=CODE_KEY))
+
             for item in item_list:
                 account, code = item.get('account'), item.get('code')
                 if account == self.account:

@@ -10,7 +10,7 @@ import aiohttp
 import json
 from urllib.parse import urlencode
 from utils.console import println
-from utils.process import process_start, get_code_list
+from utils.process import process_start
 from utils.logger import logger
 from utils.jd_init import jd_init
 from db.model import Code
@@ -167,7 +167,6 @@ class JdFlashSaleBox:
         """
         async with aiohttp.ClientSession(cookies=self.cookies, headers=self.headers) as session:
             item_list = Code.get_code_list(code_key=CODE_FLASH_SALE_BOX)
-            item_list.extend(get_code_list(CODE_FLASH_SALE_BOX))
             for item in item_list:
                 friend_account, friend_code = item['account'], item['code']
                 if friend_account == self.account:

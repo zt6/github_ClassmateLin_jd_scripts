@@ -118,7 +118,7 @@ class JdEarn:
                 println('{}, 无法获取活动数据, 退出程序!'.format(self.account))
                 return
             await self.do_tasks(session, task_list)
-            await self.notify(session)
+            #await self.notify(session)
 
 
 if __name__ == '__main__':

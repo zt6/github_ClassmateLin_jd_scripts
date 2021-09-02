@@ -3,13 +3,13 @@
 # @Time    : 2021/8/23 下午6:54
 # @Project : jd_scripts
 # @File    : jx_pasture.py
-# @Cron    : 35 6,16 * * *
+# @Cron    : 35 7,16 * * *
 # @Desc    : 京喜APP->京喜牧场->日常任务
 import json
 import random
 import time
 from datetime import datetime
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode
 
 import aiohttp
 import asyncio
@@ -20,7 +20,7 @@ from utils.jx_init import jx_init, md5
 from utils.logger import logger
 from utils.console import println
 from utils.jx_pasture_token import get_token
-from utils.process import process_start, get_code_list
+from utils.process import process_start
 from db.model import Code
 
 
@@ -72,7 +72,7 @@ class JxPasture:
             if not self.phone_id:
                 self.phone_id = generate_str()
             timestamp = str(int(time.time() * 1000))
-            js_token = md5(self.account + timestamp + self.phone_id + 'tPOamqCuk9NLgVPAljUyIHcPRmKlVxDy')
+            js_token = md5(quote(self.pin) + timestamp + self.phone_id + 'tPOamqCuk9NLgVPAljUyIHcPRmKlVxDy')
             time_ = datetime.now()
             params = {
                 'channel': '7',
@@ -85,7 +85,9 @@ class JxPasture:
                 'g_login_type': '1',
                 'callback': '',
                 'g_ty': 'ls',
-                'jxmc_jstoken': js_token
+                'jxmc_jstoken': js_token,
+                'timestamp': timestamp,
+                'phoneid': self.phone_id
             }
             if not body:
                 body = dict()
@@ -243,8 +245,8 @@ class JxPasture:
             else:
                 println('{}, 投喂失败, {}'.format(self.account, res.get('message')))
                 break
-            println('{}, 5秒后进行一次投喂小鸡!'.format(self.account))
-            await asyncio.sleep(5)
+            println('{}, 8秒后进行一次投喂小鸡!'.format(self.account))
+            await asyncio.sleep(8)
 
     @logger.catch
     async def mowing(self, session, max_times=10):
@@ -275,8 +277,8 @@ class JxPasture:
                     println('{}, 获得割草奖励, {}'.format(self.account, award_res['data']['prizepool']))
 
             if i + 1 <= max_times:
-                println('{}, 2s后进行第{}次割草!'.format(self.account, i + 1))
-                await asyncio.sleep(2)
+                println('{}, 8s后进行第{}次割草!'.format(self.account, i + 1))
+                await asyncio.sleep(8)
 
     async def sweep_chicken_legs(self, session, max_times=10):
         """
@@ -295,8 +297,8 @@ class JxPasture:
             println('{}, 第{}次扫鸡腿成功, 获得金币:{}'.format(self.account, i, res['data']['addcoins']))
 
             if i + 1 <= max_times:
-                println('{}, 5s后进行第{}次扫鸡腿!'.format(self.account, i + 1))
-                await asyncio.sleep(5)
+                println('{}, 8s后进行第{}次扫鸡腿!'.format(self.account, i + 1))
+                await asyncio.sleep(8)
 
     async def do_tasks(self, session, max_times=10):
         """
@@ -363,7 +365,6 @@ class JxPasture:
                 println('{}, 无法初始化, 退出程序!'.format(self.account))
                 return
             item_list = Code.get_code_list(code_key=CODE_JX_PASTURE)
-            item_list.extend(get_code_list(CODE_JX_PASTURE))
             for item in item_list:
                 account, code = item.get('account'), item.get('code')
                 if account == self.account:

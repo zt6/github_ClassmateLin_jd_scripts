@@ -243,26 +243,6 @@ class JdSharkBean:
             else:
                 println('{}, 摇盒子失败: {}'.format(self.account, res['resultTips']))
 
-    @property
-    def message(self):
-        return self.message
-
-    @logger.catch
-    async def notify(self):
-        """
-        :return:
-        """
-        message = '\n【活动名称】摇京豆\n【用户ID】{}\n【获得京豆】{}\n【获得红包】{}\n【获得优惠券】'.format(self.account,
-                                                                              self.bean_count, self.red_packet_num)
-
-        if len(self.coupon_list) > 0:
-            for coupon in self.coupon_list:
-                message = message + '\t' + coupon + '\n'
-        else:
-            message += '无\n'
-
-        self.message = message
-
     async def run(self):
         """
         :return:
@@ -272,7 +252,6 @@ class JdSharkBean:
             await self.do_tasks(session)
             shark_times = await self.get_shark_times(session)
             await self.do_shark(session, shark_times)
-        await self.notify()
 
 
 if __name__ == '__main__':

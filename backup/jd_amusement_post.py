@@ -11,8 +11,6 @@ import json
 import ujson
 import aiohttp
 from config import USER_AGENT
-from utils.process import get_code_list
-
 from utils.jd_init import jd_init
 from utils.console import println
 from utils.logger import logger
@@ -132,7 +130,6 @@ class JdAmusementPost:
                                          json_serialize=ujson.dumps) as session:
 
             code_list = Code.get_code_list(code_key=CODE_AMUSEMENT_POST)
-            code_list.extend(get_code_list(CODE_AMUSEMENT_POST))
             if not code_list:
                 return
             for code in code_list:
@@ -220,9 +217,5 @@ class JdAmusementPost:
 
 
 if __name__ == '__main__':
-    # from config import JD_COOKIES
-    # app = JdAmusementPost(**JD_COOKIES[8])
-    # asyncio.run(app.run())
     from utils.process import process_start
-
     process_start(JdAmusementPost, '京小鸽-游乐寄', code_key=CODE_AMUSEMENT_POST)

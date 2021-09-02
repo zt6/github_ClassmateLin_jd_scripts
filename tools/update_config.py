@@ -54,7 +54,9 @@ class Config:
         'chrome_path': 'chromium路径, 默认不需要修改，除非你是本地运行或者进行开发。',
         'joy_feed_count': '宠汪汪喂食狗粮克数',
         'server_send_key': 'server酱通知key',
-        'tg_bot_api': 'TG代理'
+        'tg_bot_api': 'TG代理',
+        'joy_exchange_num': '宠汪汪兑换京豆数, 选项, 20, 500, 默认20',
+        'jd_supermarket_exchange': '京东超市蓝币兑换物品,选项: 20, 1000, 或者其它商品唯一关键字, 默认20',
     }
 
     def __init__(self):
@@ -103,7 +105,7 @@ class Config:
                 for line in f:
                     tmp = line.split(':')
                     if len(tmp) > 1:
-                        result.append('\n{}# {}\n'.format(' ' * tmp[0].count(' '), self.conf_desc_map[tmp[0].strip()]))
+                        result.append('\n{}# {}\n'.format(' ' * tmp[0].count(' '), self.conf_desc_map.get(tmp[0].strip(), '')))
                         result.append(line)
                     else:
                         result.append(line)
