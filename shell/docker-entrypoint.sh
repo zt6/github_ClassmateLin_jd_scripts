@@ -27,39 +27,31 @@ if [ ! -d $CODE_DIR/.git ]; then
   git branch --set-upstream-to=origin/master master;
 fi
 
-if ! type ps >/dev/null 2>&1; then
-  echo "正在安装procps..."
-  apt -y install procps
-  apt clean;
-else
-    echo "procps 已安装";
-fi
+#if ! type node >/dev/null 2>&1; then
+#  echo "正在安装nodejs...";
+#  apt -y install nodejs;
+#  apt clean;
+#else
+#    echo "nodejs 已安装";
+#fi
 
-if ! type node >/dev/null 2>&1; then
-  echo "正在安装nodejs...";
-  apt -y install nodejs;
-  apt clean;
-else
-    echo "nodejs 已安装";
-fi
+#if ! type npm >/dev/null 2>&1; then
+#  echo "正在安装npm...";
+#  apt -y install npm;
+#  npm install typescript -g;
+#  apt clean;
+#else
+#    echo "npm 已安装";
+#fi
 
-if ! type npm >/dev/null 2>&1; then
-  echo "正在安装npm...";
-  apt -y install npm;
-  npm install typescript -g;
-  apt clean;
-else
-    echo "npm 已安装";
-fi
-
-if ! type chromium >/dev/null 2>&1; then
-    echo "开始安装chromium...";
-    apt -y install chromium;
-    apt clean;
-    rm -f /root/.local/share/pyppeteer;
-else
-    echo 'chromium 已安装';
-fi
+#if ! type chromium >/dev/null 2>&1; then
+#    echo "开始安装chromium...";
+#    apt -y install chromium;
+#    apt clean;
+#    rm -f /root/.local/share/pyppeteer;
+#else
+#    echo 'chromium 已安装';
+#fi
 
 if [ ! -d $CODE_DIR/conf ]; then
   echo "配置文件目录不存在, 创建目录...";
