@@ -8,7 +8,7 @@
 
 - python版本:3.7.*
 
-### 运行
+### 本地运行
 
 - `pip install virtualenv`
 - `git clone https://github.com/ClassmateLin/jd_scripts.git`
@@ -18,6 +18,39 @@
 - `mkdir conf && cp .config.yaml ./conf/`
 - 查看conf/config.yaml配置项, 每个脚本均可以单独运行。
 
+
+### docker 运行
+
+- 方式一:
+  - `docker run -itd --name jd classmatelin/scripts:v1`
+  - docker exec -it jd /bin/bash
+  - vim conf/config.yaml配置。
+
+- 方式二:
+- mkdir jd && cd jd
+- vim docker-composer.yaml
+
+```
+version: "3"
+
+services:
+  jd:
+    container_name: jd
+    image: classmatelin/scripts:v1
+    volumes:
+      - ./conf/:/scripts/conf
+      - ./logs:/scripts/logs
+    environment:
+      REPO_URL: https://github.com/ClassmateLin/scripts.git
+    dns:
+      - 8.8.8.8
+      - 114.114.114.114
+      - 119.29.29.29
+    privileged: true
+    restart: always
+```
+- docker-composer up -d
+- vim conf/config.yaml.
 
 ## 特别声明: 
 
