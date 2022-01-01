@@ -27,30 +27,30 @@
   - vim conf/config.yaml配置。
 
 - 方式二:
-- mkdir jd && cd jd
-- vim docker-composer.yaml
+  - mkdir jd && cd jd
+  - vim docker-composer.yaml
 
-```
-version: "3"
+  ```
+  version: "3"
 
-services:
-  jd:
-    container_name: jd
-    image: classmatelin/scripts:v1
-    volumes:
-      - ./conf/:/scripts/conf
-      - ./logs:/scripts/logs
-    environment:
-      REPO_URL: https://github.com/ClassmateLin/scripts.git
-    dns:
-      - 8.8.8.8
-      - 114.114.114.114
-      - 119.29.29.29
-    privileged: true
-    restart: always
-```
-- docker-composer up -d
-- vim conf/config.yaml.
+  services:
+    jd:
+      container_name: jd
+      image: classmatelin/scripts:v1
+      volumes:
+        - ./conf/:/scripts/conf
+        - ./logs:/scripts/logs
+      environment:
+        REPO_URL: https://github.com/ClassmateLin/scripts.git
+      dns:
+        - 8.8.8.8
+        - 114.114.114.114
+        - 119.29.29.29
+      privileged: true
+      restart: always
+  ```
+  - docker-composer up -d
+  - vim conf/config.yaml.
 
 ## 特别声明: 
 
