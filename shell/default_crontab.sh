@@ -73,6 +73,9 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #  京东APP->品牌闪购->闪购盲盒
 15 5,23 * * * /scripts/jd_flash_sale_box.py >> /scripts/logs/jd_flash_sale_box_`date "+\%Y-\%m-\%d"`.log 2>&1
 
+#  京东APP->免费试用
+9 9 * * * /scripts/jd_free_trials.py >> /scripts/logs/jd_free_trials_`date "+\%Y-\%m-\%d"`.log 2>&1
+
 #  京东APP->排行榜->金榜创造营
 30 7,19 * * * /scripts/jd_gold_creator.py >> /scripts/logs/jd_gold_creator_`date "+\%Y-\%m-\%d"`.log 2>&1
 
@@ -120,12 +123,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 #  特务Z
 30 10,22 * * * /scripts/jd_super_brand.py >> /scripts/logs/jd_super_brand_`date "+\%Y-\%m-\%d"`.log 2>&1
-
-#  京东APP首页->京东超市->游戏
-7 7,20 * * * /scripts/jd_supermarket.py >> /scripts/logs/jd_supermarket_`date "+\%Y-\%m-\%d"`.log 2>&1
-
-#  京东APP首页->京东超市->游戏  0点兑换物品
-59 23 * * * /scripts/jd_supermarket_exchange.py >> /scripts/logs/jd_supermarket_exchange_`date "+\%Y-\%m-\%d"`.log 2>&1
 
 #  取消商品关注和店铺关注
 50 23 * * * /scripts/jd_unsubscribe.py >> /scripts/logs/jd_unsubscribe_`date "+\%Y-\%m-\%d"`.log 2>&1

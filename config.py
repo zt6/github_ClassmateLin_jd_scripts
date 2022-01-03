@@ -64,15 +64,6 @@ LOG_DAYS = int(cfg.get('log_days', '3'))
 # 默认进程数量
 PROCESS_NUM = cfg.get('process_num', 4)
 
-# 宠汪汪进程数
-JOY_PROCESS_NUM = cfg.get('joy_process_num', 1)
-
-# 宠汪汪喂食
-JOY_FEED_COUNT = cfg.get('joy_feed_count', 20)
-
-# 宠汪汪兑换京豆数
-JOY_EXCHANGE_COUNT = cfg.get('joy_exchange_num', 20)
-
 # JD COOKIES
 JD_COOKIES = [j for j in [{'pt_pin': re.search(r'pt_pin=(.*?);', i).group(1),
                            'pt_key': re.search(r'pt_key=(.*?);', i).group(1) if re.search('pt_key=(.*?);', str(i)) else None,
@@ -152,27 +143,18 @@ QYWX_AM = cfg.get('notify', dict()).get('qywx_am', None)
 # 到家果园保留水滴
 DJ_FRUIT_KEEP_WATER = cfg.get('dj_fruit_keep_water', 10)
 
-# 拼图签到默认进程数量
-JD_PUZZLE_PROCESS_NUM = cfg.get('jd_puzzle_process_num', 1)
-
-# 京东试用商品分类列表
-JD_TRY_CID_LIST = [i.strip() for i in cfg.get('jd_try_cid_list', '手机数码, 电脑办公').split(',')]
-
-# 京东试用类型列表
-JD_TRY_TYPE_LIST = [i.strip() for i in cfg.get('jd_try_type_list', '普通试用,闪电试用').split(',')]
-
-# 京东试用商品最低价格
-JD_TRY_MIN_PRICE = int(cfg.get('jd_try_min_price', 100))
-
-# 京东试用商品提供商品最大数量, 商品提供量多的是辣鸡商品
-JD_TRY_GOODS_COUNT = int(cfg.get('jd_try_goods_count', 10))
-
-# 京东试用商品过滤关键词, 用@分隔
-JD_TRY_FILTER_KEYWORDS = [i.strip() for i in cfg.get('jd_try_filter_keywords', '教程@软件').split('@')]
-
 # chrome路径
 CHROME_PATH = cfg.get('chrome_path', None)
 
-# 京东超市蓝币兑换物品,选项: 20, 1000, 或者其它商品唯一关键字, 默认20
-JD_SUPERMARKET_EXCHANGE = cfg.get('jd_supermarket_exchange', 20)
+# 京东免费试用过滤关键词
+JD_FREE_TRAILS_FILTER_KEYWORDS = cfg.get('jd_free_trials_filter_keywords', '').split('@')
 
+
+# 京东免费试用商品最多数量
+JD_FREE_TRAILS_MAX_COUNT = cfg.get('jd_free_trials_max_count', 5)
+
+# 京东免费试用商品最低价格
+JD_FREE_TRAILS_MIN_PRICE = cfg.get('jd_free_trials_min_price', 50)
+
+# 京东免费试用商品分类
+JD_FREE_TRAILS_CATEGORIES = cfg.get('jd_free_trials_categories', '').split(',')
