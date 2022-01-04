@@ -41,6 +41,14 @@ notify:
 crontab_exclude_scripts:
   - example.py
 
+# 京东免费试用商品过滤关键字
+jd_free_trials_filter_keywords: '孕妇@老人@中年@幼儿园@教程@英语@辅导@培训@孩子@小学@成人用品@套套@情趣@自慰@阳具@飞机杯@男士用品@女士用品@内衣@高潮@避孕@乳腺@肛塞@肛门@宝宝@玩具@芭比@娃娃@男用@老人@女用@神油@足力健@老人@宠物@饲料@磨脚@跳蛋@阴道@阴部@龟头'
 
-# 京东超市蓝币兑换物品,选项: 20, 1000, 或者其它商品唯一关键字, 默认20
-jd_supermarket_exchange: 20
+# 免费试用商品最低价格
+jd_free_trials_min_price: 50
+
+# 免费试用商品最大数量
+jd_free_trials_max_count: 5
+
+# 面试试用商品分类
+jd_free_trials_categories: 服饰鞋包,闪电试,手机数码,钟表奢品,个人护理,食品饮料,家用电器,电脑办公,美妆护肤
