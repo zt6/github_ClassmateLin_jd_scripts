@@ -1,4 +1,7 @@
 ﻿# python scripts
+ 
+ 
+v1版本代码不是很理想, 已更换到**[scripts_v2](https://github.com/ClassmateLin/scripts_v2)**.
 
 ## python3 学习资源
 
