@@ -81,6 +81,9 @@ v1版本代码不是很理想, 已更换到[scripts_v2](https://github.com/Class
 
 - ***conf/config.yaml 中的crontab_exclude_scripts的配置项配合config/crontab.sh可实现自定义脚本执行。***
 
+- 如果我的项目对您有帮助:
+
+<img src="https://classmatelin.top/upload/2022/01/571641820763_.pic-7b8e58ed85294d7caf606decfbd8bbce.jpg" width="400" height="400">
 
 
 ## 脚本列表
