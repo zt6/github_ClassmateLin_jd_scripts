@@ -25,7 +25,7 @@ v1版本代码不是很理想, 已更换到[scripts_v2](https://github.com/Class
 ### docker 运行
 
 - 方式一:
-  - `docker run -itd --name jd classmatelin/scripts:v1`
+  - `docker run -itd --name jd classmatelin/scripts:latest`
   - docker exec -it jd /bin/bash
   - vim conf/config.yaml配置。
 
